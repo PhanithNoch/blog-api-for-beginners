@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('title');
             $table->string('image')->nullable();
+            $table->bigInteger('user_id')->unsigned(); // Add a foreign key column for the user who created the post
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         
 
             $table->timestamps(); // Add timestamps for created_at and updated_at

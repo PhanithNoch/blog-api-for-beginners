@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 // get current authenticated user
 Route::get('/user', function (Request $request) {
@@ -15,7 +17,17 @@ Route::get('/user', function (Request $request) {
 
 
 
-// define route for user registration and login
+// Authentication routes
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/logout', [AuthController::class,'logout'])->middleware('auth:sanctum');
+
+// Authenticated routes for posts
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+
+    // comment routes
+    Route::post('/comments', [CommentController::class, 'store']);
+});
