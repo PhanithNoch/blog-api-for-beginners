@@ -34,6 +34,12 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
+        // Post::with(['user', 'comments'])->ddRawSql();
+//         $query = Post::where('title','!=','')->with(['user', 'comments']);
+
+// $query->toSql();
+
+// dd($query->toSql());
 
         $page = request()->integer('page', 1);
 

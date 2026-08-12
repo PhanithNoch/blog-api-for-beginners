@@ -3,12 +3,14 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 #[Fillable(['title', 'image', 'user_id'])]
 
 
 class Post extends Model
 {
+    use HasFactory;
 
 // protected $with = ['comments']; // eager loading to avoid n+1 problem
 
